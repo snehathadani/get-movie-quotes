@@ -1,0 +1,60 @@
+import React from 'react';
+
+class PostMovieQuoteForm extends React.Component {
+    constructor(props){
+        super(props);
+        this.state= {
+            movieQuote: {
+                quote:'',
+                movie:'',
+                character:''
+            }
+        };
+    }
+    handleChange = (e)=> {
+        this.setState({
+            movieQuote:{
+            ...this.state.movieQuote,
+            [e.target.name]: e.target.value
+            }
+        });
+    };
+    render(){
+        //console.log(this.state.movieQuote);
+        return(
+            <div>
+                <h2> Post (Add) A New Quote </h2>
+                <form>
+                    <input 
+                    type="text"
+                    name="Quote"
+                    placeholder="Quote"
+                    onChange= {this.handleChange}
+                    value= {this.state.movieQuote.quote}
+                    
+                   
+                    />
+                     <input 
+                    type="text"
+                    name="Character"
+                    placeholder="Character"
+                    onChange= {this.handleChange}
+                    value= {this.state.movieQuote.character}
+
+                    />
+                    <input 
+                    type="text"
+                    name="Movie"
+                    placeholder="Movie"
+                    onChange= {this.handleChange}
+                    value= {this.state.movieQuote.movie}
+
+                    />
+                    <button> Post Quote </button>
+                </form>
+            </div>
+        );
+    };
+}
+
+export default PostMovieQuoteForm;
