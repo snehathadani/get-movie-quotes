@@ -1,5 +1,6 @@
 import React from 'react';
-
+import ErrorMessage from './ErrorMessage';
+import SuccessMessage from './Successmessage';
 
 class PutMovieQuoteForm extends React.Component  {
     constructor(){
@@ -15,18 +16,19 @@ class PutMovieQuoteForm extends React.Component  {
     handleChange = (e)=> {
         this.setState({
             movieQuote: {
+                ...this.state.movieQuote,
                 [e.target.name]: e.target.value
             }
         });
     };
     render() {
         return (
-            <div>
+            <div className="quotes-form">
                 <h2> Put (Update) AQuote </h2>
                 <form>
                     <input 
                     type="text"
-                    name="Quote"
+                    name="quote"
                     placeholder="Quote"
                     onChange= {this.handleChange}
                     value= {this.state.movieQuote.quote}
@@ -35,7 +37,7 @@ class PutMovieQuoteForm extends React.Component  {
                     />
                      <input 
                     type="text"
-                    name="Character"
+                    name="character"
                     placeholder="Character"
                     onChange= {this.handleChange}
                     value= {this.state.movieQuote.character}
@@ -43,13 +45,17 @@ class PutMovieQuoteForm extends React.Component  {
                     />
                     <input 
                     type="text"
-                    name="Movie"
+                    name="movie"
                     placeholder="Movie"
                     onChange= {this.handleChange}
                     value= {this.state.movieQuote.movie}
 
                     />
-                    <button> Put Quote </button>
+                     {this.props.putErrorMessage? (
+                        <ErrorMessage message={this.props.putErrorMessage}/> ) : null }
+                        {this.props.putSuccessMessage ? (
+                        <SuccessMessage message={this.props.putSuccessMessage}/> ) : null}
+                    <button type= "submit" className="quotes-btn" > Put Quote </button>
                 </form>
             </div>
         );

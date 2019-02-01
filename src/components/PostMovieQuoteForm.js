@@ -1,4 +1,6 @@
 import React from 'react';
+import ErrorMessage from './ErrorMessage';
+import SuccessMessage from './Successmessage';
 
 class PostMovieQuoteForm extends React.Component {
     constructor(props){
@@ -22,12 +24,12 @@ class PostMovieQuoteForm extends React.Component {
     render(){
         //console.log(this.state.movieQuote);
         return(
-            <div>
+            <div className="quotes-form">
                 <h2> Post (Add) A New Quote </h2>
                 <form>
                     <input 
                     type="text"
-                    name="Quote"
+                    name="quote"
                     placeholder="Quote"
                     onChange= {this.handleChange}
                     value= {this.state.movieQuote.quote}
@@ -36,7 +38,7 @@ class PostMovieQuoteForm extends React.Component {
                     />
                      <input 
                     type="text"
-                    name="Character"
+                    name="character"
                     placeholder="Character"
                     onChange= {this.handleChange}
                     value= {this.state.movieQuote.character}
@@ -44,13 +46,18 @@ class PostMovieQuoteForm extends React.Component {
                     />
                     <input 
                     type="text"
-                    name="Movie"
+                    name="movie"
                     placeholder="Movie"
                     onChange= {this.handleChange}
                     value= {this.state.movieQuote.movie}
 
                     />
-                    <button> Post Quote </button>
+                     {this.props.postErrorMessage? (
+                        <ErrorMessage message={this.props.postErrorMessage}/> ) : null }
+                        {this.props.postSuccessMessage ? (
+                        <SuccessMessage message={this.props.postSuccessMessage}/> ) : null}
+                    <button type= "submit" className="quotes-btn" > Post Quote </button>
+                   
                 </form>
             </div>
         );

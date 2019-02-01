@@ -1,5 +1,6 @@
 import React from 'react';
-
+import ErrorMessage from './ErrorMessage';
+import SuccessMessage from './Successmessage';
 class DeleteMovieQuoteForm extends React.Component {
     constructor (props) {
         super (props);
@@ -15,6 +16,7 @@ class DeleteMovieQuoteForm extends React.Component {
         this.setState (
             {
                 movieQuote: {
+                    ...this.state.movieQuote,
                     [e.target.name]: e.target.value
                 }
             }
@@ -22,12 +24,12 @@ class DeleteMovieQuoteForm extends React.Component {
     }
     render () {
         return (
-            <div>
+            <div className="quotes-form">
                 <h2>  Delete (Delete) A Quote </h2>
                 <form>
                     <input 
                     type="text"
-                    name="Quote"
+                    name="quote"
                     placeholder="Quote"
                     onChange= {this.handleChange}
                     value= {this.state.movieQuote.quote}
@@ -36,7 +38,7 @@ class DeleteMovieQuoteForm extends React.Component {
                     />
                      <input 
                     type="text"
-                    name="Character"
+                    name="character"
                     placeholder="Character"
                     onChange= {this.handleChange}
                     value= {this.state.movieQuote.character}
@@ -44,13 +46,17 @@ class DeleteMovieQuoteForm extends React.Component {
                     />
                     <input 
                     type="text"
-                    name="Movie"
+                    name="movie"
                     placeholder="Movie"
                     onChange= {this.handleChange}
                     value= {this.state.movieQuote.movie}
 
                     />
-                    <button> Delete Quote </button>
+                    {this.props.deleteErrorMessage ? (
+                        <ErrorMessage message={this.props.deleteErrorMessage}/>) : null}
+                        {this.props.deleteSuccessmessage ? 
+                        (<SuccessMessage message={this.props.deleteSuccessmessage}/> ) : null}
+                    <button type= "submit" className="quotes-btn" > Delete Quote </button>
                 </form>
             </div>
         );
